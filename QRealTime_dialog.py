@@ -378,7 +378,7 @@ class KoBoToolbox (QTableWidget):
         
                                                 
     def getTable(self,XFormKey,lastID,topElement,version= 'null'):
-        url='https://kc.kobotoolbox.org/'+self.getValue('user')+'/exports/'+XFormKey+'/csv/a9hS9aDdYPqqZ9JqUJdrKr_2019_02_07_06_17_47.csv'
+        url='https://kc.kobotoolbox.org/'+self.getValue('user')+'/reports/'+XFormKey+'/export.csv'
         method='GET'
         print('inside getTable',url)
         table=[]
