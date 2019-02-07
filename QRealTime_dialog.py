@@ -34,6 +34,7 @@ from six.moves import range
 from qgis.core import QgsMessageLog, Qgis
 import csv
 import codecs
+import xls
 tag='KoBoToolbox'
 def print(text,opt=None):
     """ to redirect print to MessageLog"""
@@ -378,7 +379,7 @@ class KoBoToolbox (QTableWidget):
         
                                                 
     def getTable(self,XFormKey,lastID,topElement,version= 'null'):
-        url='https://kc.kobotoolbox.org/'+self.getValue('user')+'/reports/'+XFormKey+'/export.csv'
+        url='https://kc.kobotoolbox.org/'+self.getValue('user')+'/reports/'+XFormKey+'/export.xls'
         method='GET'
         print('inside getTable',url)
         table=[]
@@ -389,7 +390,7 @@ class KoBoToolbox (QTableWidget):
             print('response content  is',response.text)
             print ('response content type is',response.encoding)
             response.encoding='utf-8'
-            data = csv.DictReader(response.content.decode('utf-8').splitlines(),delimiter=';')
+            data = xls.DictReader(response.content.decode('utf-8').splitlines(),delimiter=';')
             print('dictionary is',data)
             table=data
             print ('table is:',table)
