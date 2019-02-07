@@ -335,23 +335,23 @@ class QRealTime:
                 index=self.ImportData.comboBox.currentIndex()
                 selectedForm= self.ImportData.comboBox.itemData(index)
                 url='https://kf.kobotoolbox.org/assets/'+selectedForm
-                para={'format':'xml'}
+                para={'format':'json'}
                 headers=service.getAuth()
                 response= requests.request('GET',url,proxies=getProxiesConf(),headers=headers,verify=False,params=para)
                 if response.status_code==200:
-                    xml=response.content
-                    # with open('importForm.xml','w') as importForm:
+                    json=response.content
+                    # with open('importForm.json','w') as importForm:
                     #     importForm.write(response.content)
-                    self.layer_name,self.version= self.updateLayer(layer,xml)
+                    self.layer_name,self.version= self.updateLayer(layer,json)
                     layer.setName(self.layer_name)
                     service.collectData(layer,selectedForm,True,self.layer_name,self.version)
 
                 
                         
-    def updateLayer(self,layer,xml):
+    def updateLayer(self,layer,json):
         ns='{http://www.w3.org/2002/xforms}'
         nsh='{http://www.w3.org/1999/xhtml}'
-        root= ET.fromstring(xml)
+        root= ET.fromstring(json)
         #key= root[0][1][0][0].attrib['id']
         layer_name=root[0].find(nsh+'title').text
         instance=root[0][1].find(ns+'instance')
@@ -399,11 +399,11 @@ class QRealTime:
         surveyDict= {"name":layer.name(),"title":layer.name(),'VERSION':version,"instance_name": 'uuid()',"submission_url": '',
         "default_language":'default','id_string':layer.name(),'type':'survey','children':fieldDict }
         survey=create_survey_element_from_dict(surveyDict)
-        xml=survey.to_xml(validate=None, warnings=warnings)
+        json=survey.to_xml(validate=None, warnings=warnings)
         os.chdir(os.path.expanduser('~'))
-        with open('Xform.xml','w') as xForm:
-            xForm.write(xml)
-        self.dlg.getCurrentService().sendForm(layer.name(),'Xform.xml')
+        with open('Xform.json','w') as xForm:
+            xForm.write(json)
+        self.dlg.getCurrentService().sendForm(layer.name(),'Xform.json')
         
     def download(self,checked=False):
         if checked==True:
