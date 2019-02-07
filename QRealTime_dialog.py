@@ -34,7 +34,6 @@ from six.moves import range
 from qgis.core import QgsMessageLog, Qgis
 import csv
 import codecs
-import xls
 tag='KoBoToolbox'
 def print(text,opt=None):
     """ to redirect print to MessageLog"""
