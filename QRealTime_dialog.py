@@ -378,7 +378,7 @@ class KoBoToolbox (QTableWidget):
         
                                                 
     def getTable(self,XFormKey,lastID,topElement,version= 'null'):
-        url='https://kc.kobotoolbox.org/'+self.getValue('user')+'/reports/'+XFormKey+'/export.xls'
+        url='https://kc.kobotoolbox.org/'+self.getValue('user')+'/exports/'+XFormKey+'/csv/'
         method='GET'
         print('inside getTable',url)
         table=[]
@@ -389,7 +389,7 @@ class KoBoToolbox (QTableWidget):
             print('response content  is',response.text)
             print ('response content type is',response.encoding)
             response.encoding='utf-8'
-            data = xls.DictReader(response.content.decode('utf-8').splitlines(),delimiter=';')
+            data = csv.DictReader(response.content.decode('utf-8').splitlines(),delimiter=';')
             print('dictionary is',data)
             table=data
             print ('table is:',table)
