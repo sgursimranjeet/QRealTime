@@ -164,7 +164,7 @@ class KoBoToolbox (QTableWidget):
    
 
 #    def getExportExtension(self):
-#        return 'xml'
+#        return 'json'
         
     def getFormList(self):
         user=self.getValue('user')
