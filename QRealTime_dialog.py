@@ -221,15 +221,16 @@ class KoBoToolbox (QTableWidget):
             response,remoteTable = self.getTable(xFormKey,"",topElement,version)
         else:
             response,remoteTable = self.getTable(xFormKey,self.getValue('lastID'),topElement,version)
-        print ('before Update Layer')
+        
         if response.status_code==200:
+            print ('before Update Layer')
             if remoteTable:
                 print ('table have some data')
                 self.updateLayer(layer,remoteTable)
         else:
             self.iface.messageBar().pushCritical(self.tr("KoBoToolbox"),self.tr("Not able to collect data from Aggregate"))
     
-    def updateFields(self,layer,text='instanceID',q_type=QVariant.String,config={}):
+    def updateFields(self,layer,text='uid',q_type=QVariant.String,config={}):
         flag=True
         for field in layer.fields():
             
@@ -327,7 +328,7 @@ class KoBoToolbox (QTableWidget):
         uuidList = []
         if lyr:
             for qgisFeature in lyr.getFeatures():
-                uuidList.append(qgisFeature['instanceID'])
+                uuidList.append(qgisFeature['uid'])
         return uuidList
 
     def guessWKTGeomType(self,geom):
