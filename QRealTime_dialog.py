@@ -389,7 +389,7 @@ class KoBoToolbox (QTableWidget):
             print('response content  is',response.text)
             print ('response content type is',response.encoding)
             response.encoding='utf-8'
-            data = csv.DictReader(response.content.decode('utf-8').splitlines(),delimiter=';')
+            data = csv.reader(response.content.decode('utf-8').splitlines(),delimiter=';')
             print('dictionary is',data)
             table=data
             print ('table is:',table)
