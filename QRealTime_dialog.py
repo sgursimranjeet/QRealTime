@@ -125,7 +125,7 @@ class KoBoToolbox (QTableWidget):
         response = requests.get(url,auth=(self.getValue('user'), self.getValue('password')),params=para)
         token=response.json()['token']
         headers = {
-    'Authorization': token,
+    'Authorization': 'Token '+token,
 }
         return headers
 
