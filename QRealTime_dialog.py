@@ -84,7 +84,7 @@ class KoBoToolbox (QTableWidget):
         ["lastID",''],
         ['sync time','']
         ]
-    kpi='https://kc.kobotoolbox.org/'
+    kpi='https://kf.kobotoolbox.org/'
     def __init__(self,parent,caller):
         super(KoBoToolbox, self).__init__(parent)
         self.parent = parent
