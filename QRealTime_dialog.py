@@ -382,7 +382,7 @@ class KoBoToolbox (QTableWidget):
         method='GET'
         print('inside getTable',url)
         table=[]
-        response = requests.get(url,proxies=getProxiesConf(),headers=self.getAuth(),verify=False)
+        response = requests.get(url,headers=self.getAuth())
         if not response.status_code == 200:
                 print('Response is not OK.')
                 return response, table
