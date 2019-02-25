@@ -380,9 +380,10 @@ class KoBoToolbox (QTableWidget):
     def getTable(self,XFormKey,lastID,topElement,version= 'null'):
         url='https://kc.kobotoolbox.org/'+self.getValue('user')+'/reports/'+XFormKey+'/export.csv'
         method='GET'
+        para={'format':'csv'}
         print('inside getTable',url)
         table=[]
-        response = requests.request(method,url,proxies=getProxiesConf(),headers=self.getAuth())
+        response = requests.request(method,url,proxies=getProxiesConf(),headers=self.getAuth(),verify=False,params=para)
         if not response.status_code == 200:
                 print('Response is not OK.')
                 return response, table
