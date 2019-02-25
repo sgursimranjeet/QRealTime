@@ -173,12 +173,11 @@ class KoBoToolbox (QTableWidget):
         status='not able to download'
         para={'format':'json'}
         response= requests.get(url,headers=self.getAuth(),params=para
-        print("status=",response.status_code)
         forms= response.json()
         try:
             keyDict= {form['uid']:form['name'] for form in forms['results']}
             print('keyDict is',keyDict)
-            print("status=",response.status_code)                   
+            print('status=',response.status_code)                   
             return keyDict,response
         except:
             print ('getformList','not able to get the forms')
